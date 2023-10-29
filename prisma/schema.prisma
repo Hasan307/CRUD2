@@ -1,0 +1,117 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id BigInt @default(autoincrement()) @id @db.UnsignedBigInt
+  title       String @db.VarChar(100)
+  metaTitle   String? @db.VarChar(100)
+  slug        String    @unique @db.VarChar(100)
+  content     String?  @db.VarChar(100)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+ 
+}
+model user{
+  id          BigInt       @default(autoincrement()) @id @db.UnsignedBigInt @unique
+  firstName   String?  @db.VarChar(100)
+  middleName  String? @db.VarChar(100)
+  lastName    String?  @db.VarChar(100)
+  mobile     String? @db.VarChar(100)
+  email       String?   @unique @db.VarChar(100)
+  password    String?   @db.VarChar(100)
+  admin       Int? @db.TinyInt
+  registeredAt   DateTime?  @default(now())
+  lastLogin  DateTime?  @db.DateTime
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  order order[]
+  product product[]
+  cart cart[]
+}
+
+model product{
+  id BigInt @default(autoincrement()) @id @db.UnsignedBigInt @unique
+  firstName   String   @db.VarChar(100)
+  metaTitle   String? @db.VarChar(100)
+  slug        String    @unique @db.VarChar(100)
+  summary  String?  @db.VarChar(100)
+  price Int @db.Int @default(11)
+  discount Int @db.Int @default(11)
+  userId BigInt @db.UnsignedBigInt @default(20)
+  publishedAt   DateTime  @default(now())
+  startsAt  DateTime?  @db.DateTime
+  endsAt  DateTime?  @db.DateTime
+  creattedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user user @relation(fields: [userId], references: [id])
+  product_meta product_meta[]
+  product_review product_review[]
+}
+
+model product_meta{
+ id BigInt @id @default(autoincrement()) @db.UnsignedBigInt @unique
+ key String @db.VarChar(100)
+ content String? @db.VarChar(100)
+ productId BigInt @db.UnsignedBigInt @default(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product product @relation(fields: [productId], references: [id])
+}
+model product_review{
+  id BigInt @id @default(autoincrement()) @db.UnsignedBigInt @unique
+  title String @db.VarChar(100)
+  rating Int @db.Int @default(11)
+  content String? @db.VarChar(100)
+  productId BigInt @db.UnsignedBigInt @default(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product product @relation(fields: [productId], references: [id])
+}
+model cart{
+  id BigInt @id @default(autoincrement()) @db.UnsignedBigInt @unique
+  sessionId String @db.VarChar(100)
+  token String @db.VarChar(100)
+  status String @db.VarChar(100)
+  firstName String @db.VarChar(100)
+  middleName String? @db.VarChar(100)
+  lastName String @db.VarChar(100)
+  mobile String @db.VarChar(100)
+  email String @db.VarChar(100)
+  city String @db.VarChar(100)
+  country String @db.VarChar(100)
+  userId BigInt @db.UnsignedBigInt @default(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user user @relation(fields: [userId], references: [id])
+
+}
+
+model order{
+  id BigInt @id @default(autoincrement()) @db.UnsignedBigInt @unique
+  title String @db.VarChar(100)
+  token String @db.VarChar(100)
+  subTotal Int @db.Int @default(11)
+  itemDiscount Int @db.Int @default(11)
+  tax Int @db.Int @default(11)
+  total Int @db.Int @default(11)
+  discount Int @db.Int @default(11)
+  grandTotal Int @db.Int @default(11)
+  firstName String @db.VarChar(100)
+  middleName String? @db.VarChar(100)
+  lastName String @db.VarChar(100)
+  mobile String @db.VarChar(100)
+  email String @db.VarChar(100)
+  city String @db.VarChar(100)
+  country String @db.VarChar(100)
+  userId BigInt @db.UnsignedBigInt @default(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user user @relation(fields: [userId], references: [id])
+}
