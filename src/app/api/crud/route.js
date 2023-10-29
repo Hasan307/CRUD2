@@ -43,22 +43,46 @@ export async function POST (req, res) {
     //         _sum: { price: true },
     //   });
 
-    const result = await prisma.product_review.groupBy({
-        by:["rating"],
-        _count:{
-            id:true
-             },
-             having: {
-                 rating: {
-                     lte: 4
-                 }
-             }
+    // const result = await prisma.product_review.groupBy({
+    //     by:["rating"],
+    //     _count:{
+    //         id:true
+    //          },
+    //          having: {
+    //              rating: {
+    //                  lte: 4
+    //              }
+    //          }
       
+    // })
+    const createUser= prisma.user.create({
+        data: {
+            firstName: "Md",
+            middleName: "Abu",
+            lastName: "Hasan",
+            mobile: "123432321",
+            email: "fffsm.a.exxzdsdsddsdsdsdssdddddd",
+            password: "321",
+            admin:1,
+        },
     })
 
+    const createProduct= prisma.product.create({
+        data: {
+            firstName: "Md",
+            metaTitle: "Abu",
+            slug: "Hasadsdsssadn",
+            summary: "1234321",
+            price:100,
+            discount:10,
+            userId:1,
+        },
+    })
+ 
+    const result= await prisma.$transaction([createUser, createProduct]);
        
         
-        return NextResponse.json({status: "ok", result: result})
+        return NextResponse.json({status: "ok" })
        
     }
     catch(e){
