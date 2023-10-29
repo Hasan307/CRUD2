@@ -74,8 +74,123 @@ export async function POST (req, res) {
         //         }
         //     ]
         // })
-        const product_review = await prisma.product_review.createMany({
+        // const product_review = await prisma.product_review.createMany({
+        //     data: [
+        //         {
+        //             title: "kdjs",
+        //             content: "lks",
+        //             rating: 5,
+        //             productId: 7,
+                 
+        //         },
+        //         {
+        //             title: "kdjss",
+        //             content: "lsks",
+        //             rating: 4,
+        //             productId: 7,
+                    
+        //         }
+        //     ]
             
+        // })
+        // const order_create= await prisma.order.createMany({
+        //     data: [
+        //         {
+        //             title: "kdjs",
+        //             token: "lks",
+        //             subTotal: 5,
+        //             itemDiscount: 5,
+        //             tax: 5,
+        //             total: 5,
+        //             discount: 5,
+        //             grandTotal: 5,
+        //             userId: 1,
+        //             firstName: "kdjs",
+        //             middleName: "lks",
+        //             lastName: "ls",
+        //             mobile: "ewew",
+        //             email: "ksdl",
+        //             city: "lksdjd",
+        //             country: "lksdjd"
+
+        //         },
+        //         {
+        //             title: "kdjss",
+        //             token: "lsks",
+        //             subTotal: 5,
+        //             itemDiscount: 5,
+        //             tax: 5,
+        //             total: 5,
+        //             discount: 5,
+        //             grandTotal: 5,
+        //             userId: 1,
+        //             firstName: "kdjs",
+        //             middleName: "lks",
+        //             lastName: "ls",
+        //             mobile: "ewew",
+        //             email: "ksdl",
+        //             city: "lksdjd",
+        //             country: "lksdjd"
+
+        //         }
+        //     ]
+        // }) 
+        
+
+
+        // const category_create= await prisma.category.createMany({
+        //     data:[
+        //         {
+        //             title: "kdjs",
+        //             metaTitle: "lks",
+        //             slug: "ls",
+        //             content: "ewew",
+                   
+        //         },
+        //         {
+        //             title: "kdjss",
+        //             metaTitle: "lks",
+        //             slug: "lss",
+        //             content: "ewew",
+                    
+        //         }
+            
+        //     ]
+        // })
+
+
+        const cart_create= await prisma.cart.createMany({
+            data:[
+                {
+                    sessionId: "kdjs",
+                    token: "lks",
+                    userId: 1,
+                    status: "1",
+                    
+                    firstName: "kdjs",
+                    middleName: "lks",
+                    lastName: "ls",
+                    mobile: "ewew",
+                    email: "ksdl",
+                    city: "lksdjd",
+                    country: "lksdjd"
+                },
+                {
+                   sessionId: "kdxjs",
+                    token: "lkds",
+                    userId: 1,
+                
+                    status: "j",
+                  
+                    firstName: "kdjs",
+                    middleName: "lks",
+                    lastName: "ls",
+                    mobile: "ewew",
+                    email: "ksdl",
+                    city: "lksdjd",
+                    country: "lksdjd"
+                }
+            ]
         })
 
         return NextResponse.json({ status: "Success" });
